@@ -80,7 +80,11 @@ enum msm_cpu {
 	MSM_CPU_8974,
 	MSM_CPU_8627,
 	MSM_CPU_8625,
-	MSM_CPU_9625
+	MSM_CPU_9625,
+	MSM_CPU_8092,
+	MSM_CPU_8226,
+	MSM_CPU_8910,
+	MSM_CPU_8625Q,
 };
 
 enum pmic_model {
@@ -347,4 +351,82 @@ static inline int cpu_is_msm8625(void)
 #endif
 }
 
+static inline int cpu_is_msm8974(void)
+{
+#ifdef CONFIG_ARCH_MSM8974
+	enum msm_cpu cpu = socinfo_get_msm_cpu();
+
+	BUG_ON(cpu == MSM_CPU_UNKNOWN);
+	return cpu == MSM_CPU_8974;
+#else
+	return 0;
+#endif
+}
+
+static inline int cpu_is_mpq8092(void)
+{
+#ifdef CONFIG_ARCH_MPQ8092
+	enum msm_cpu cpu = socinfo_get_msm_cpu();
+
+	BUG_ON(cpu == MSM_CPU_UNKNOWN);
+	return cpu == MSM_CPU_8092;
+#else
+	return 0;
+#endif
+
+}
+
+static inline int cpu_is_msm8226(void)
+{
+#ifdef CONFIG_ARCH_MSM8226
+	enum msm_cpu cpu = socinfo_get_msm_cpu();
+
+	BUG_ON(cpu == MSM_CPU_UNKNOWN);
+	return cpu == MSM_CPU_8226;
+#else
+	return 0;
+#endif
+}
+
+static inline int cpu_is_msm8910(void)
+{
+#ifdef CONFIG_ARCH_MSM8910
+	enum msm_cpu cpu = socinfo_get_msm_cpu();
+
+	BUG_ON(cpu == MSM_CPU_UNKNOWN);
+	return cpu == MSM_CPU_8910;
+#else
+	return 0;
+#endif
+}
+
+static inline int cpu_is_msm8625q(void)
+{
+#ifdef CONFIG_ARCH_MSM8625
+	enum msm_cpu cpu = socinfo_get_msm_cpu();
+
+	BUG_ON(cpu == MSM_CPU_UNKNOWN);
+	return cpu == MSM_CPU_8625Q;
+#else
+	return 0;
+#endif
+}
+
+static inline int soc_class_is_msm8960(void)
+{
+	return cpu_is_msm8960() || cpu_is_msm8960ab();
+}
+
+static inline int soc_class_is_apq8064(void)
+{
+	return cpu_is_apq8064() || cpu_is_apq8064ab();
+}
+
+static inline int soc_class_is_msm8930(void)
+{
+	return cpu_is_msm8930() || cpu_is_msm8930aa() || cpu_is_msm8930ab() ||
+	       cpu_is_msm8627();
+}
+
+>>>>>>> 89b3299... msm: socinfo: Add support for 8625q
 #endif
